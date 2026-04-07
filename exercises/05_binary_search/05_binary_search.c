@@ -16,7 +16,28 @@ int n;
 
 int binary_search(const char *target_name) {
     // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+    int low = 0;
+    int high = n - 1;
+
+    while (low <= high) {
+        // 计算中间位置，防止溢出的标准写法
+        int mid = low + (high - low) / 2;
+        
+        // 比较中间学生的名字与目标名字
+        int cmp = strcmp(students[mid].name, target_name);
+
+        if (cmp == 0) {
+            return mid; // 找到了！
+        } else if (cmp < 0) {
+            // 中间名字比目标小（字母序靠前），往右边找
+            low = mid + 1;
+        } else {
+            // 中间名字比目标大（字母序靠后），往左边找
+            high = mid - 1;
+        }
+    }
+
+    return -1; // 查无此人
 }
 
 int main(void) {
