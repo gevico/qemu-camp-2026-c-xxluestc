@@ -9,7 +9,22 @@ typedef struct {
 
 void insertion_sort(Student students[], int n) {
     // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+    for (int i = 1; i < n; i++) {
+        // 1. 选出当前待排序的学生（“抓起一张牌”）
+        Student key = students[i];
+        int j = i - 1;
+
+        /* * 2. 将 key.score 与前面的学生成绩进行比较
+         * 因为是要“从高到低”，所以如果前面的成绩比 key 小，就后移
+         */
+        while (j >= 0 && students[j].score < key.score) {
+            students[j + 1] = students[j];
+            j--;
+        }
+
+        // 3. 将 key 插入到腾出的空位
+        students[j + 1] = key;
+    }
 }
 
 int main(void) {
