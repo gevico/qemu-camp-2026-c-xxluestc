@@ -14,7 +14,33 @@ Student students[MAX_STUDENTS];
 
 void quick_sort(int left, int right) {
     // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+    if (left >= right) return;
+
+    // 1. 选取中间元素作为基准 (Pivot)
+    Student pivot = students[left + (right - left) / 2];
+    int i = left;
+    int j = right;
+
+    // 2. 分区操作 (Partition)
+    while (i <= j) {
+        // 寻找左边比基准分数小的（我们需要高分在前，所以分小的要往后挪）
+        while (students[i].score > pivot.score) i++;
+        // 寻找右边比基准分数大的
+        while (students[j].score < pivot.score) j--;
+
+        if (i <= j) {
+            // 交换两个学生的位置
+            Student temp = students[i];
+            students[i] = students[j];
+            students[j] = temp;
+            i++;
+            j--;
+        }
+    }
+
+    // 3. 递归处理剩下的部分
+    if (left < j) quick_sort(left, j);
+    if (i < right) quick_sort(i, right);
 }
 
 int main(void) {
