@@ -20,9 +20,8 @@ struct Test {
  *      → 结构体首地址 = 成员地址 - 成员偏移量
  * 类型约束：使用 typeof 对 ptr 的类型进行校验，减少误用风险
  */
-#define container_of(ptr, type, member)
-    // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+#define container_of(ptr, type, member) \
+    ((type *)((char *)(ptr) - offsetof(type, member)))  //成员的实际地址 - 成员到起点的距离 = 结构体的起始地址
 
 int main(void) {
     struct Test t = {.a = 42, .b = 'Z'};

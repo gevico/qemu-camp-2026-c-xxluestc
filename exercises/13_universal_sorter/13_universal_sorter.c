@@ -40,8 +40,45 @@ void processFile(const char *filename) {
     printf("=== 处理数据来自: %s ===\n", filename);
 
     switch (choice) {
-        // TODO: 在这里添加你的代码
-        // I AM NOT DONE
+        case 1: {
+            int arr[20];
+            for (int i = 0; i < n; i++) {
+                fscanf(fin, "%d", &arr[i]); // 从文件 fin 中读取一个整数，存入 arr[i]
+            }
+            sort(arr, n, sizeof(int), compareInt);
+            for (int i = 0; i < n; i++) {
+                printf("%d ", arr[i]);
+            }
+            printf("\n");
+            break;
+        }
+        case 2: {
+            float arr[20];
+            for (int i = 0; i < n; i++) {
+                fscanf(fin, "%f", &arr[i]);
+            }
+            sort(arr, n, sizeof(float), compareFloat);
+            for (int i = 0; i < n; i++) {
+                printf("%.2f ", arr[i]);
+            }
+            printf("\n");
+            break;
+        }
+        case 3: {
+            char *arr[20];
+            for (int i = 0; i < n; i++) {
+                arr[i] = (char*)malloc(32);
+                fscanf(fin, "%s", arr[i]);
+            }
+            sort(arr, n, sizeof(char*), compareString);
+            for (int i = 0; i < n; i++) {
+                printf("%s ", arr[i]);
+            }
+            printf("\n");
+            break;
+        }
+        default:
+            printf("错误: 未知的选择 %d\n", choice);
     }
 
     fclose(fin);
