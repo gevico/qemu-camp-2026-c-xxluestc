@@ -11,9 +11,31 @@
 
 int parse_url(const char* url) {
     int err = 0;
+    const char *query_start = strchr(url, '?');
 
-    // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+    if (query_start == NULL) {
+        err = 1;
+        goto exit;
+    }
+
+    query_start++;
+
+    size_t len = strlen(query_start);
+    char *query = (char*)malloc(len + 1);
+    strcpy(query, query_start);
+
+    char *token = strtok(query, "&");
+
+    while (token != NULL) {
+        char *eq = strchr(token, '=');
+        if (eq != NULL) {
+            *eq = '\0';
+            printf("key = %s, value = %s\n", token, eq + 1);
+        }
+        token = strtok(NULL, "&");
+    }
+
+    free(query);
 
 exit:
     return err;
